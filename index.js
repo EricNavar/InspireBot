@@ -34,11 +34,9 @@ bot.on("message", message => {
             console.log(e);
             message.channel.send("Could not find inspiration!" + e);
           });
-          await page.screenshot({ path: "inspiration.png" });
-          console.log("normal screenshot taken");
-          message.channel.send("", {
-            files: ["inspiration.png"]
-          });
+          var screenshot = await page.screenshot({type: 'png'});
+          console.log("screenshot taken");
+          message.channel.send({files:[{ attachment: screenshot, name: "screenshot.png" }]});
           await browser.close();
         });
       } catch (error) {
